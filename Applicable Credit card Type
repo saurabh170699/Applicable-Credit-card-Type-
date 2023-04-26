@@ -1,0 +1,98 @@
+The task is to find the Applicable Credit card Type and create CardType object based on the Credit Points of a customer.
+
+//CardOnOffer
+
+public class CardOnOffer 
+{
+	public static CardType getOfferCard(Customer object)
+	{
+		int creaditPoint = object.getCreditPoints();
+		
+		if(creaditPoint >=100 && creaditPoint <=500)
+		{
+			return new CardType(object , "Silver");	
+		}
+		else if(creaditPoint >500 && creaditPoint <=100)
+		{
+			return new CardType(object, "Gold");
+			
+		}
+		else if(creaditPoint >1000)
+		{
+			return new CardType(object, "Platinum");
+			
+		}
+		else
+		{
+			return new CardType(object,"EMI");
+		}
+	}
+}
+
+
+//Card Type
+
+public class CardType 
+{
+	private Customer customer;
+	private String cardType;
+	
+	public CardType(Customer customer, String cardType) {
+		super();
+		this.customer = customer;
+		this.cardType = cardType;
+	}
+
+	@Override
+	public String toString() 
+	{
+		return "the Customer '"+customer+"'Is Eligible for "+this.cardType+"' card";
+	}
+}
+
+//Customer
+
+public class Customer {
+
+	private String customerName;
+	private int creaditPoint;
+	
+	public Customer(String customerName, int creaditPoint) {
+		super();
+		this.customerName = customerName;
+		this.creaditPoint = creaditPoint;
+	}
+	
+	public int getCreditPoints() 
+	{
+		
+		return this.creaditPoint; 
+	}
+	@Override
+	public String toString() {
+		return this.customerName;
+	}
+}
+
+// Main Class
+import java.util.Scanner;
+
+public class MainCreaditCard {
+
+	public static void main(String[] args) 
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the Name Of the Customer :");
+		String name = sc.nextLine();
+		
+		System.out.println("Enter the Creadit Points of the Customer");
+		int creaditPoint = sc.nextInt();
+	
+		Customer c1 = new Customer(name, creaditPoint);
+		
+		CardType OfferCard = CardOnOffer.getOfferCard(c1);
+		System.out.println(OfferCard);
+
+	}
+}
+
